@@ -17,11 +17,13 @@
     "react-dom": "18.3.1",
     "react-native": "0.76.9",
     "react-native-web": "~0.19.13",
-    "readable-stream": "^4.7.0"
+    "readable-stream": "^4.7.0",
+    "web-streams-polyfill": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.3.12",
+    "metro-cache": "^0.82.1",
     "typescript": "^5.3.3"
   },
   "private": true
