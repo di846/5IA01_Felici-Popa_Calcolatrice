@@ -8,18 +8,27 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.grid}>
-        <NumberButton number={"1"} />
-        <NumberButton number={"2"} />
-        <NumberButton number={"3"} />
-        <NumberButton number={"4"} />
-        <NumberButton number={"5"} />
-        <NumberButton number={"6"} />
-        <NumberButton number={"7"} />
-        <NumberButton number={"8"} />
-        <NumberButton number={"9"} />
-        <NumberButton number={"0"} />
+        <View style={styles.row}>
+          <NumberButton number={"7"} />
+          <NumberButton number={"8"} />
+          <NumberButton number={"9"} />
+        </View>
+        <View style={styles.row}>
+          <NumberButton number={"4"} />
+          <NumberButton number={"5"} />
+          <NumberButton number={"6"} />
+        </View>
+        <View style={styles.row}>
+          <NumberButton number={"1"} />
+          <NumberButton number={"2"} />
+          <NumberButton number={"3"} />
+        </View>
+        <View style={styles.row}>
+          <View style={styles.placeholder} />
+          <NumberButton number={"0"} />
+          <View style={styles.placeholder} />
+        </View>
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -28,13 +37,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   grid: {
+    alignItems: 'center',
+    gap: 5, 
+  },
+  row: {
     flexDirection: 'row',
-    flexWrap: 'wrap-reverse',
-    width: 150, 
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    width: 100,
+    marginBottom: 5,
   },
 });

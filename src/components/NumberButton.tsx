@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         padding: 10,
         borderRadius: 5,
-        margin: 5,
         alignItems: 'center',
     },
     buttonPressed: {
