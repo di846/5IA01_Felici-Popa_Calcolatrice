@@ -1,11 +1,6 @@
-// NumberButton.js
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import {
-    colors,
-    baseStyles,
-    getDynamicStyles,
-} from './CalculatorStyles';
+import {colors, baseStyles, getDynamicStyles,} from './CalculatorStyles';
 
 const NumberButton = ({ label, onPress, color_Scheme, style: customStyle = {} }) => {
     const themeColors = colors[color_Scheme];

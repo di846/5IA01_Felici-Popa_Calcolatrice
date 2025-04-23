@@ -1,10 +1,6 @@
 import React from 'react';
 import { Pressable, Text, useColorScheme } from 'react-native';
-import {
-    colors,
-    baseStyles,
-    getDynamicStyles,
-} from './CalculatorStyles';
+import {colors, baseStyles, getDynamicStyles,} from './CalculatorStyles';
 
 const OperatorButton = ({ label, onPress, type, color_Scheme, style: customStyle = {}}) => {
     const themeColors = colors[color_Scheme];
