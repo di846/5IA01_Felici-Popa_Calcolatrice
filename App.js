@@ -61,7 +61,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 20, 
     justifyContent: 'flex-end',  
   },
   row: {
