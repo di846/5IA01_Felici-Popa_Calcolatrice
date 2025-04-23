@@ -1,40 +1,35 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import Button from './Button';
+// NumberButton.js
+import React from 'react';
+import { Pressable, Text } from 'react-native';
+import {
+    colors,
+    baseStyles,
+    getDynamicStyles,
+} from './CalculatorStyles';
 
-const NumberButton = ({ number, onPress }) => {
-    const [isPressed, setIsPressed] = useState(false);
+const NumberButton = ({ label, onPress, color_Scheme, style: customStyle = {} }) => {
+    const themeColors = colors[color_Scheme];
+    const buttonType = 'number';
 
     return (
-        <TouchableOpacity
-            style={[styles.button, isPressed && styles.buttonPressed ]}
-            onPressIn={() => setIsPressed(true)}
-            onPressOut={() => setIsPressed(false)}
-            //onPress={onPress}
+        <Pressable
+            style={({ pressed }) => [
+                baseStyles.buttonBase,
+                getDynamicStyles(themeColors, buttonType, pressed).button,
+                customStyle,
+            ]}
+            onPress={onPress}
         >
-            <Text style={[styles.text, isPressed && styles.textPressed]}>{number}</Text>
-            </TouchableOpacity>
+            {({ pressed }) => (
+                <Text style={[
+                    baseStyles.textBase,
+                    getDynamicStyles(themeColors, buttonType, pressed).text,
+                ]}>
+                    {label}
+                </Text>
+            )}
+        </Pressable>
     );
 };
-
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: 'black',
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center',
-    },
-    buttonPressed: {
-        backgroundColor: 'gray',
-    },
-    text: {
-        color: 'white',
-        fontSize: 16,
-    },
-
-    textPressed: {
-        color: 'black',
-    },
-});
 
 export default NumberButton;

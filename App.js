@@ -1,32 +1,59 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Button from './src/components/Button';
+import { StyleSheet, View, useColorScheme } from 'react-native'; 
 import NumberButton from './src/components/NumberButton';
 import OperatorButton from './src/components/OperatorButton';
+import { colors, baseStyles } from './src/components/CalculatorStyles';
 
 export default function App() {
+  const colorScheme = useColorScheme() ?? 'light';
+  const theme = colors[colorScheme]; 
+
+  const handlePress = (label) => {
+    console.log('Pressed:', label);
+    // Logica della calcolatrice
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.grid}>
-        <View style={styles.row}>
-          <NumberButton number={"7"} />
-          <NumberButton number={"8"} />
-          <NumberButton number={"9"} />
-        </View>
-        <View style={styles.row}>
-          <NumberButton number={"4"} />
-          <NumberButton number={"5"} />
-          <NumberButton number={"6"} />
-        </View>
-        <View style={styles.row}>
-          <NumberButton number={"1"} />
-          <NumberButton number={"2"} />
-          <NumberButton number={"3"} />
-        </View>
-        <View style={styles.row}>
-          <View style={styles.placeholder} />
-          <NumberButton number={"0"} />
-          <View style={styles.placeholder} />
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      {/* Aggiungi qui l'area del display della calcolatrice */}
+      {/* <View style={styles.displayArea}><Text>0</Text></View> */}
+
+      <View style={styles.keypadArea}>
+        <View style={styles.grid}>
+          <View style={styles.row}>
+          <OperatorButton label={"M+"} type="special" onPress={() => handlePress('M+')} color_Scheme={colorScheme}/>
+          <OperatorButton label={"M-"} type="special" onPress={() => handlePress('M-')} color_Scheme={colorScheme}/>
+          <OperatorButton label={"MR"} type="special" onPress={() => handlePress('MR')} color_Scheme={colorScheme}/>
+          <OperatorButton label={"÷"} type="operator" onPress={() => handlePress('/')} color_Scheme={colorScheme}/> 
+          </View>
+          {/* Riga 7-8-9 */}
+          <View style={styles.row}>
+            <NumberButton label={"7"} onPress={() => handlePress('7')} color_Scheme={colorScheme}/>
+            <NumberButton label={"8"} onPress={() => handlePress('8')} color_Scheme={colorScheme}/>
+            <NumberButton label={"9"} onPress={() => handlePress('9')} color_Scheme={colorScheme}/>
+            <OperatorButton label={"x"} type="operator" onPress={() => handlePress('x')} color_Scheme={colorScheme}/> 
+          </View>
+          {/* Riga 4-5-6 */}
+          <View style={styles.row}>
+            <NumberButton label={"4"} onPress={() => handlePress('4')} color_Scheme={colorScheme}/>
+            <NumberButton label={"5"} onPress={() => handlePress('5')} color_Scheme={colorScheme}/>
+            <NumberButton label={"6"} onPress={() => handlePress('6')} color_Scheme={colorScheme}/>
+            <OperatorButton label={"-"} type="operator" onPress={() => handlePress('-')} color_Scheme={colorScheme}/> 
+          </View>
+          {/* Riga 1-2-3 */}
+          <View style={styles.row}>
+            <NumberButton label={"1"} onPress={() => handlePress('1')} color_Scheme={colorScheme}/>
+            <NumberButton label={"2"} onPress={() => handlePress('2')} color_Scheme={colorScheme}/>
+            <NumberButton label={"3"} onPress={() => handlePress('3')} color_Scheme={colorScheme}/>
+            <OperatorButton label={"+"} type="operator" onPress={() => handlePress('+')} color_Scheme={colorScheme}/> 
+          </View>
+          {/* Riga 0 */}
+          <View style={styles.row}>
+            <OperatorButton label={"C"} type="special" onPress={() => handlePress('C')} color_Scheme={colorScheme}/>
+            <NumberButton label={"0"} onPress={() => handlePress('0')} color_Scheme={colorScheme}/>
+            <OperatorButton label={"."} type="operator" onPress={() => handlePress('.')} color_Scheme={colorScheme}/> 
+            <OperatorButton label={"="} type="equals" onPress={() => handlePress('=')} color_Scheme={colorScheme}/> 
+          </View>
         </View>
       </View>
     </View>
@@ -36,18 +63,17 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  grid: {
-    alignItems: 'center',
-    gap: 5, 
+    paddingBottom: 20, 
+    justifyContent: 'flex-end',  
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 100,
-    marginBottom: 5,
+    justifyContent: 'center', 
+    marginBottom: baseStyles.buttonBase.margin, 
+  },
+  buttonPlaceholder: {
+    width: baseStyles.buttonBase.width,
+    height: baseStyles.buttonBase.height,
+    margin: baseStyles.buttonBase.margin,
   },
 });

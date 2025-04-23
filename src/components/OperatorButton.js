@@ -1,37 +1,35 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import Button from './Button';
+import React from 'react';
+import { Pressable, Text, useColorScheme } from 'react-native';
+import {
+    colors,
+    baseStyles,
+    getDynamicStyles,
+} from './CalculatorStyles';
 
-const OperatorButton = ({ operator, onPress }) => {
-    const [isPressed, setIsPressed] = useState(false);
+const OperatorButton = ({ label, onPress, type, color_Scheme, style: customStyle = {}}) => {
+    const themeColors = colors[color_Scheme];
+    const buttonType = type;
 
     return (
-        <TouchableOpacity
-            style={[styles.button, isPressed && styles.buttonPressed]}
-            onPressIn={() => setIsPressed(true)}
-            onPressOut={() => setIsPressed(false)}
-            onPress={onPress} 
-            >
-            <Text style={styles.text}>{operator}</Text>
-        </TouchableOpacity>
+        <Pressable
+            style={({ pressed }) => [
+                baseStyles.buttonBase,
+                getDynamicStyles(themeColors, buttonType, pressed).button,
+                customStyle,
+            ]}
+            onPress={onPress}
+        >
+            {({ pressed }) => (
+                <Text style={[
+                    baseStyles.textBase,
+                    getDynamicStyles(themeColors, buttonType, pressed).text,
+                    (buttonType === 'operator' || buttonType === 'special') && baseStyles.operatorText,
+                ]}>
+                    {label}
+                </Text>
+            )}
+        </Pressable>
     );
 };
-
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: '#ddd',
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonPressed: {
-        backgroundColor: '#bbb',
-    },
-    text: {
-        fontSize: 18,
-        color: '#000',
-    },
-});
 
 export default OperatorButton;
