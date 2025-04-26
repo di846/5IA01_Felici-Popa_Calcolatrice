@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <StatusBar barStyle="light" translucent backgroundColor="transparent"/>
 
       {/* Area del display */}
       <View style={styles.displayArea}>

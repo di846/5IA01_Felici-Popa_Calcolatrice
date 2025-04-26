@@ -7,6 +7,13 @@ const Display = ({ value = "0", prevOperation = "", color_Scheme, fontScale }) =
     // Colore del testo basato sullo schema di colori
     const textColor = colors[color_Scheme].buttonDefaultText;
 
+    // Funzione per calcolare dinamicamente il numero di righe
+    const calculateNumberOfLines = () => {
+        return Math.min(Math.ceil(value.length / 10), 6);
+    };
+
+    const numberOfLines = calculateNumberOfLines();
+
     return (
         <View style={[styles.container]}>
             {/* Mostra l'operazione precedente se esiste e il valore non è "Error" */}
@@ -18,7 +25,7 @@ const Display = ({ value = "0", prevOperation = "", color_Scheme, fontScale }) =
             {/* Mostra il valore corrente con dimensione del font scalabile */}
             <Text
                 style={[styles.text, { color: textColor, fontSize: styles.text.fontSize * fontScale }]}
-                numberOfLines={5}
+                numberOfLines={numberOfLines}
                 adjustsFontSizeToFit={true}
             >
                 {value}
