@@ -1,4 +1,3 @@
-// src/components/Button.js
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import { colors, baseStyles, getDynamicStyles, buttonDiameter } from './CalculatorStyles';

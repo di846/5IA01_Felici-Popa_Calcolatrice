@@ -12,11 +12,18 @@ export default function App() {
   const [value, setValue] = useState(initialValue);
   const [memory, setMemory] = useState(initialMemory);
   const [expanded, setExpanded] = useState(false);
-
   const sizeMultiplier = expanded ? 0.85 : 1;
+  const [prevOperation, setPrevOperation] = useState(""); 
 
-  const handlePress = label =>
+  const handlePress = label => {
+    if (label === "C") {
+      setPrevOperation(""); 
+    }
+    if ((label === "=" && value !== "Error") || (label === 'M+' && value !== "Error") || (label === 'M-' && value !== "Error")) {
+      setPrevOperation(value);
+    }
     utilsHandlePress(label, value, setValue, memory, setMemory);
+  };
 
   const toggleExpanded = () =>
     utilsToggleExpanded(expanded, setExpanded);
@@ -26,7 +33,7 @@ export default function App() {
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent"/>
 
       <View style={[styles.displayArea, { flex: expanded ? 0.6 : 1 }]}>
-        <Display value={value} color_Scheme={colorScheme} fontScale={expanded ? 0.85 : 1}/>
+        <Display value={value} prevOperation={prevOperation} color_Scheme={colorScheme} fontScale={expanded ? 0.85 : 1}/>
       </View>
       
       <View style={styles.keyPadArea}>

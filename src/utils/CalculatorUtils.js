@@ -23,13 +23,19 @@ export const handlePress = (label, value, setValue, memory, setMemory) => {
     return;
 
   } else if (label === 'M+') {
-    const current = parseFloat(value) || 0;
-    setMemory(prev => prev + current);
+    if(calculateResult(value) !== "Error") {
+        const current = parseFloat(value) || 0;
+        setMemory(prev => prev + current);
+    }
+    setValue(calculateResult(value));
     return;
 
   } else if (label === 'M-') {
-    const current = parseFloat(value) || 0;
-    setMemory(prev => prev - current);
+    if(calculateResult(value) !== "Error") {
+        const current = parseFloat(value) || 0;
+        setMemory(prev => prev - current);
+    }
+    setValue(calculateResult(value));
     return;
 
   } else if (label === 'MR') {
@@ -53,26 +59,30 @@ export const handlePress = (label, value, setValue, memory, setMemory) => {
     return;
 
   } else if (label === '=') {
-    try {
-      const result = eval(
-        value
-          .replace(/x/g, '*')
-          .replace(/÷/g, '/')
-          .replace(/\^/g, '**')
-          .replace(/√(\d+(\.\d+)?)/g, 'Math.sqrt($1)')
-          .replace(/π/g, 'Math.PI')
-      );
-
-      if (isNaN(result) || !isFinite(result)) {
-        setValue("Error");
-        return;
-      }
-
-      setValue(result.toString());
-    } catch (error) {
-      setValue("Error");
-    }
+    setValue(calculateResult(value));
+    return;
   }
+};
+
+export const calculateResult = (value) => {
+    try {
+        const result = eval(
+            value
+                .replace(/x/g, '*')
+                .replace(/÷/g, '/')
+                .replace(/\^/g, '**')
+                .replace(/√(\d+(\.\d+)?)/g, 'Math.sqrt($1)')
+                .replace(/π/g, 'Math.PI')
+        );
+
+        if (isNaN(result) || !isFinite(result)) {
+            return "Error";
+        }
+
+        return result.toString();
+    } catch (error) {
+        return "Error";
+    }
 };
 
 export const toggleExpanded = (expanded, setExpanded) => {
