@@ -1,8 +1,11 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+// Ottieni la larghezza dello schermo
 export const screenWidth = Dimensions.get('window').width;
+// Calcola il diametro del pulsante (massimo 80)
 export const buttonDiameter = Math.min(screenWidth / 5, 80);
 
+// Definizione dei colori per i temi "dark" e "light"
 export const colors = {
   dark: {
     background: '#000000',
@@ -30,6 +33,7 @@ export const colors = {
   },
 };
 
+// Stili di base per i pulsanti e il testo
 export const baseStyles = StyleSheet.create({
   buttonBase: {
     width: buttonDiameter,
@@ -53,11 +57,13 @@ export const baseStyles = StyleSheet.create({
   }
 });
 
+// Funzione per ottenere stili dinamici in base al tema, tipo e stato premuto
 export const getDynamicStyles = (themeColors, type, pressed) => {
-  let backgroundColor = themeColors.buttonDefaultBg;
+  let backgroundColor = themeColors.buttonDefaultBg; 
   let textColor = themeColors.buttonDefaultText;
-  let pressedBackgroundColor = themeColors.buttonPressedDefaultBg;
+  let pressedBackgroundColor = themeColors.buttonPressedDefaultBg; 
 
+  // Modifica i colori in base al tipo di pulsante
   switch (type) {
     case 'operator':
     case 'special':
@@ -75,13 +81,13 @@ export const getDynamicStyles = (themeColors, type, pressed) => {
       break;
   }
 
+  // Restituisce gli stili dinamici per il pulsante e il testo
   return {
     button: {
-      backgroundColor: pressed ? pressedBackgroundColor : backgroundColor,
+      backgroundColor: pressed ? pressedBackgroundColor : backgroundColor, // Cambia colore se premuto
     },
     text: {
-      color: textColor,
-      color: (pressed && type === 'equals') ? themeColors.buttonDefaultText : textColor,
+      color: (pressed && type === 'equals') ? themeColors.buttonDefaultText : textColor, // Cambia colore testo se premuto "="
     },
   };
 };
