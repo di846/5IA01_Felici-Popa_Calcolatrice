@@ -9,7 +9,7 @@ const Display = ({ value = "0", color_Scheme}) => {
     <View style={[styles.container]}>
       <Text
         style={[styles.text, { color: textColor }]}
-        numberOfLines={1} 
+        numberOfLines={5} 
         adjustsFontSizeToFit={true} 
       >
         {value}

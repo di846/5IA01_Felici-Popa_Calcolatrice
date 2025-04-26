@@ -11,8 +11,37 @@ export default function App() {
 
   const handlePress = (label) => {
     console.log('Pressed:', label);
-    let oldValue = value;
-    setValue(oldValue + label);
+    console.log(value);
+
+    if (label !== 'C' && label !== 'M+' && label !== 'M-' && label !== 'MR' && label !== '=' && value !== 'Error') {
+      if ((value === '0' && label !== '0') || value !== '0') {
+        if (value === '0' && label !== '.' && label !== '÷' && label !== 'x' && label !== '-' && label !== '+') {
+          setValue(label);
+          return;
+        }
+        let oldValue = value;
+        setValue(oldValue + label);
+        return;
+      }
+    } else if (label === 'C') {
+      setValue("0");
+    } else if (value === "Error") {
+      return;
+    } else if (label === '=') {
+      try {
+        const result = eval(value.replace(/x/g, '*').replace(/÷/g, '/'));
+        
+        if (isNaN(result) || !isFinite(result)) {
+          setValue("Error");
+          return;
+        }
+        
+        setValue(result.toString());
+      }
+      catch (error) {
+        setValue("Error");
+      }
+    }
   };
 
   return (
@@ -28,7 +57,7 @@ export default function App() {
             <Button label={"M+"} type="special" onPress={() => handlePress('M+')} color_Scheme={colorScheme}/>
             <Button label={"M-"} type="special" onPress={() => handlePress('M-')} color_Scheme={colorScheme}/>
             <Button label={"MR"} type="special" onPress={() => handlePress('MR')} color_Scheme={colorScheme}/>
-            <Button label={"÷"} type="operator" onPress={() => handlePress('/')} color_Scheme={colorScheme}/> 
+            <Button label={"÷"} type="operator" onPress={() => handlePress('÷')} color_Scheme={colorScheme}/> 
           </View>
 
           <View style={styles.row}>
