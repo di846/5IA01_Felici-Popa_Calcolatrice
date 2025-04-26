@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, Text } from 'react-native';
 import {colors, baseStyles, getDynamicStyles,} from './CalculatorStyles';
 
-const NumberButton = ({ label, onPress, color_Scheme, style: customStyle = {} }) => {
+const NumberButton = ({ label, onPress, color_Scheme}) => {
     const themeColors = colors[color_Scheme];
     const buttonType = 'number';
 
@@ -11,7 +11,6 @@ const NumberButton = ({ label, onPress, color_Scheme, style: customStyle = {} })
             style={({ pressed }) => [
                 baseStyles.buttonBase,
                 getDynamicStyles(themeColors, buttonType, pressed).button,
-                customStyle,
             ]}
             onPress={onPress}
         >

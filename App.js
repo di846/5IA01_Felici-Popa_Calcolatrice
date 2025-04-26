@@ -2,6 +2,7 @@ import { StyleSheet, View, useColorScheme } from 'react-native';
 import NumberButton from './src/components/NumberButton';
 import OperatorButton from './src/components/OperatorButton';
 import { colors, baseStyles } from './src/components/CalculatorStyles';
+import Display from './src/components/Display';
 
 export default function App() {
   const colorScheme = useColorScheme() ?? 'light';
@@ -14,7 +15,10 @@ export default function App() {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      {/*Area display*/}
+      
+      <View style={styles.displayArea}>
+        <Display value={0} color_Scheme={colorScheme} /> 
+      </View>
 
       <View style={styles.keypadArea}>
         <View style={styles.grid}>
@@ -68,9 +72,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     marginBottom: baseStyles.buttonBase.margin, 
   },
-  buttonPlaceholder: {
-    width: baseStyles.buttonBase.width,
-    height: baseStyles.buttonBase.height,
-    margin: baseStyles.buttonBase.margin,
+  displayArea: {
+    flex: 1,
+    justifyContent: 'flex-end', 
   },
 });
